@@ -13,7 +13,7 @@ const api_secret =
   "azpwp44trbdv2g6qryrq4gtxwwuszppezc273xzjpkqeh5v5xtahgkeqqvr5sjpp";
 const serverClient = StreamChat.getInstance(api_key, api_secret);
 
-app.post("/signup", async (res, req) => {
+app.post("/signup", async (req, res) => {
   try {
     const { firstName, lastName, username, password } = req.body;
     const userId = uuidv4();
@@ -25,8 +25,32 @@ app.post("/signup", async (res, req) => {
   }
 });
 
-app.post("/login");
+app.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const { users } = await serverClient.queryUsers({ name: username });
+    if (username.length === 0) return res.json({ message: "User not found" });
+
+    const token = serverClient.createToken(userId);
+    const passwordMatch = await bcrypt.compare(
+      password,
+      users[0].hashedPassword
+    );
+
+    if (passwordMatch) {
+      res.json({
+        token,
+        firstName: users[0].firstName,
+        lastName: users[0].lastName,
+        username,
+        userId: users[0].id,
+      });
+    }
+  } catch (error) {
+    res.json(error);
+  }
+});
 
 app.listen(3001, () => {
-  consol.log("Server is running on port 3001");
+  console.log("Server is running on port 3001");
 });
