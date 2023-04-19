@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-function SignUp() {
+function SignUp({ setIsAuth }) {
   const cookies = new Cookies();
   const [user, setUser] = useState(null);
 
@@ -17,6 +17,7 @@ function SignUp() {
       cookies.set("username", username);
       cookies.set("hashedPassword", hashedPassword);
       cookies.set("userId", userId);
+      setIsAuth(true);
     });
   };
 
@@ -36,6 +37,7 @@ function SignUp() {
         onChange={(e) => setUser({ ...user, username: e.target.value })}
       />
       <input
+        type="password"
         placeholder="Password"
         onChange={(e) => setUser({ ...user, password: e.target.value })}
       />

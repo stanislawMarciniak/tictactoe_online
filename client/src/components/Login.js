@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-function Login() {
+function Login({ setIsAuth }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,6 +18,7 @@ function Login() {
         cookies.set("lastName", lastName);
         cookies.set("username", username);
         cookies.set("userId", userId);
+        setIsAuth(true);
       });
   };
 
@@ -29,6 +30,7 @@ function Login() {
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
+        type="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
