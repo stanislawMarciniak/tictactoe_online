@@ -30,8 +30,8 @@ function App() {
 
   return (
     <div className="App">
-      <Login />
       <SignUp />
+      <Login />
     </div>
   );
 }
