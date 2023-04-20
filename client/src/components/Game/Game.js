@@ -80,7 +80,7 @@ function Game({ channel }) {
   };
 
   return (
-    <div className="App">
+    <div className="game">
       <Scores score={score} isX={isX} />
       <Board board={board} onClick={handleClick} />
       <button className="reset" onClick={handleReset}>
