@@ -46,12 +46,14 @@ function Game({ channel }) {
       );
     } else if (board.some((x) => x !== null))
       setPlayer(player === "X" ? "O" : "X");
+  }, [endClick]);
 
+  useEffect(() => {
     document.body.addEventListener("click", handleKeyDown);
     return () => {
       document.body.removeEventListener("click", handleKeyDown);
     };
-  }, [board, endClick]);
+  }, [board]);
 
   const handleKeyDown = () => {
     if (checkWin() || board.every((x) => x !== null)) {
@@ -72,15 +74,21 @@ function Game({ channel }) {
     return <h1>Waiting for other player to join...</h1>;
   }
 
-  const handleClick = async (id) => {
-    if (turn === player && board[id] === "") {
+  const handleClick = async (clicked) => {
+    console.log(turn === player);
+    console.log(board[clicked]);
+
+    if (turn === player && board[clicked] === null) {
+      console.log("handleClick");
       setTurn(player === "X" ? "O" : "X");
 
       await channel.sendEvent({
         type: "game-move",
-        data: { id, player },
+        data: { clicked, player },
       });
-      const afterClicked = board.map((n, index) => (index === id ? player : n));
+      const afterClicked = board.map((n, index) =>
+        index === clicked ? player : n
+      );
       setBoard(afterClicked);
     }
   };
@@ -99,7 +107,7 @@ function Game({ channel }) {
       setTurn(currentPlayer);
       setBoard(
         board.map((val, idx) => {
-          if (idx === event.data.id && val === "") {
+          if (idx === event.data.clicked && val === null) {
             return event.data.player;
           }
           return val;
