@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #efefef;
+  font-family: "Fredoka", sans-serif;
+  text-align: center;
+
+}
+
+.reset {
+  font-size: 1.5rem;
+  font-family: 'Fredoka', sans-serif;
+  box-shadow: 0 0 7px #888;
+  width: 7rem;
+  height: 2rem;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: 7px;
+  background-color: blue;
+  color: #efefef;
+}
+
+.reset:hover {
+  box-shadow: 0 0 14px #888;
+}

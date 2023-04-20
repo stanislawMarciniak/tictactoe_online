@@ -1,0 +1,33 @@
+.scores {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: white;
+  margin: 2rem auto;
+  box-shadow: 0 0 8px;
+  width: 20rem;
+  border-radius: 0.5rem;
+  display:flex;
+  justify-content: space-evenly;
+}
+
+.score {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.x-score {
+  color: red;
+  border-bottom: 5px solid red;
+  border-radius: 0 0 0 0.5rem;
+}
+
+.o-score {
+  color: blue;
+  border-bottom: 5px solid blue;
+  border-radius: 0 0 0.5rem  0;
+}
+
+.inactive {
+  border-bottom: 5px solid transparent;
+}
