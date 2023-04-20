@@ -32,9 +32,20 @@ button:hover {
   box-shadow: 0 0 14px #888;
 }
 
+button:active {
+  background-color: darkblue;
+}
+
 .App {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.logoutButton {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  margin: 30px;
 }

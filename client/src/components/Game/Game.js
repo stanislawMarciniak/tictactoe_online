@@ -19,7 +19,7 @@ function Game({ channel }) {
     channel.state.watcher_count === 2
   );
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [isX, setIsX] = useState(false);
+  const [isX, setIsX] = useState(true);
   const [score, setScore] = useState({ x: 0, o: 0 });
   const [endClick, setEndClick] = useState(false);
   const [isXStarted, setIsXStarted] = useState(true);
@@ -38,7 +38,7 @@ function Game({ channel }) {
       setScore(
         isX ? { ...score, x: score.x + 1 } : { ...score, o: score.o + 1 }
       );
-    } else setIsX(!isX);
+    } else if (board.some((x) => x !== null)) setIsX(!isX);
 
     document.body.addEventListener("click", handleKeyDown);
     return () => {
@@ -63,7 +63,7 @@ function Game({ channel }) {
     setplayersJoined(event.watcher_count === 2);
   });
   if (!playersJoined) {
-    return <div>Waiting for other player to join...</div>;
+    return <h1>Waiting for other player to join...</h1>;
   }
 
   const handleClick = (id) => {
@@ -75,7 +75,7 @@ function Game({ channel }) {
   const handleReset = () => {
     setBoard(Array(9).fill(null));
     setScore({ x: 0, o: 0 });
-    setIsX(false);
+    setIsX(true);
     setIsXStarted(true);
   };
 

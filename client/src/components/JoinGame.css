@@ -1,0 +1,21 @@
+.joinGame input {
+  font-size: 1.5rem;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  width: 300px;
+  height: 3rem;
+  box-shadow: 0 0 2px #888;
+}
+
+.joinGame button {
+  width: 15rem;
+}
+
+h1{
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  color: blue;
+}

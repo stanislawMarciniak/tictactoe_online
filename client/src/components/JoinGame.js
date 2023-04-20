@@ -31,7 +31,7 @@ const JoinGame = () => {
         </Channel>
       ) : (
         <div className="joinGame">
-          <h4> Create Game </h4>
+          <h1> Create Game </h1>
           <input
             placeholder="Username of rival.."
             onChange={(event) => {
