@@ -19,7 +19,8 @@ function Game({ channel }) {
     channel.state.watcher_count === 2
   );
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [isX, setIsX] = useState(true);
+  const [player, setPlayer] = useState("X");
+  const [turn, setTurn] = useState("X");
   const [score, setScore] = useState({ x: 0, o: 0 });
   const [endClick, setEndClick] = useState(false);
   const [isXStarted, setIsXStarted] = useState(true);
@@ -36,9 +37,12 @@ function Game({ channel }) {
   useEffect(() => {
     if (checkWin() && !endClick) {
       setScore(
-        isX ? { ...score, x: score.x + 1 } : { ...score, o: score.o + 1 }
+        player === "X"
+          ? { ...score, x: score.x + 1 }
+          : { ...score, o: score.o + 1 }
       );
-    } else if (board.some((x) => x !== null)) setIsX(!isX);
+    } else if (board.some((x) => x !== null))
+      setPlayer(player === "X" ? "O" : "X");
 
     document.body.addEventListener("click", handleKeyDown);
     return () => {
@@ -53,8 +57,7 @@ function Game({ channel }) {
     if (endClick) {
       setBoard(Array(9).fill(null));
       setEndClick(false);
-      setIsX(isXStarted);
-
+      setPlayer(isXStarted ? "O" : "X");
       setIsXStarted(!isXStarted);
     }
   };
@@ -67,21 +70,21 @@ function Game({ channel }) {
   }
 
   const handleClick = (id) => {
-    let value = isX ? "X" : "O";
-    const afterClicked = board.map((n, index) => (index === id ? value : n));
+    setTurn(player);
+    const afterClicked = board.map((n, index) => (index === id ? player : n));
     setBoard(afterClicked);
   };
 
   const handleReset = () => {
     setBoard(Array(9).fill(null));
     setScore({ x: 0, o: 0 });
-    setIsX(true);
+    setPlayer("X");
     setIsXStarted(true);
   };
 
   return (
     <div className="game">
-      <Scores score={score} isX={isX} />
+      <Scores score={score} player={player} />
       <Board board={board} onClick={handleClick} />
       <button className="reset" onClick={handleReset}>
         Reset
