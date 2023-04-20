@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useChatContext } from "stream-chat-react";
 import Board from "./gameComponents/Board";
 import Scores from "./gameComponents/Scores";
 import "./Game.css";
@@ -24,6 +25,8 @@ function Game({ channel }) {
   const [score, setScore] = useState({ x: 0, o: 0 });
   const [endClick, setEndClick] = useState(false);
   const [isXStarted, setIsXStarted] = useState(true);
+
+  const { client } = useChatContext();
 
   const checkWin = () => {
     for (let i = 0; i < WIN_CONDITION.length; i++) {
@@ -69,10 +72,17 @@ function Game({ channel }) {
     return <h1>Waiting for other player to join...</h1>;
   }
 
-  const handleClick = (id) => {
-    setTurn(player);
-    const afterClicked = board.map((n, index) => (index === id ? player : n));
-    setBoard(afterClicked);
+  const handleClick = async (id) => {
+    if (turn === player && board[id] === "") {
+      setTurn(player === "X" ? "O" : "X");
+
+      await channel.sendEvent({
+        type: "game-move",
+        data: { id, player },
+      });
+      const afterClicked = board.map((n, index) => (index === id ? player : n));
+      setBoard(afterClicked);
+    }
   };
 
   const handleReset = () => {
@@ -81,6 +91,22 @@ function Game({ channel }) {
     setPlayer("X");
     setIsXStarted(true);
   };
+
+  channel.on((event) => {
+    if (event.type == "game-move" && event.user.id !== client.userID) {
+      const currentPlayer = event.data.player === "X" ? "O" : "X";
+      setPlayer(currentPlayer);
+      setTurn(currentPlayer);
+      setBoard(
+        board.map((val, idx) => {
+          if (idx === event.data.id && val === "") {
+            return event.data.player;
+          }
+          return val;
+        })
+      );
+    }
+  });
 
   return (
     <div className="game">

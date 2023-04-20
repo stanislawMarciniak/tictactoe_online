@@ -24,3 +24,7 @@
 .o {
   color: blue
 }
+
+.box:active {
+  background-color: whitesmoke;
+}
