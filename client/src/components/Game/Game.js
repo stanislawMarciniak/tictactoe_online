@@ -75,9 +75,6 @@ function Game({ channel }) {
   }
 
   const handleClick = async (clicked) => {
-    console.log(turn === player);
-    console.log(board[clicked]);
-
     if (turn === player && board[clicked] === null) {
       console.log("handleClick");
       setTurn(player === "X" ? "O" : "X");
@@ -118,7 +115,7 @@ function Game({ channel }) {
 
   return (
     <div className="game">
-      <Scores score={score} player={player} />
+      <Scores score={score} turn={turn} />
       <Board board={board} onClick={handleClick} />
       <button className="reset" onClick={handleReset}>
         Reset
