@@ -60,8 +60,6 @@ function Game({ channel }) {
         type: "game-over",
       });
       setBoard(Array(9).fill(null));
-      setPlayer(isXStarted ? "O" : "X");
-      setTurn(isXStarted ? "O" : "X");
       setIsXStarted(!isXStarted);
     }
   };
@@ -70,11 +68,16 @@ function Game({ channel }) {
     setplayersJoined(event.watcher_count === 2);
   });
   if (!playersJoined) {
-    return <h1>Waiting for other player to join...</h1>;
+    return (
+      <div className="Game">
+        <h1>Waiting for other player to join...</h1>
+        <div class="custom-loader"></div>
+      </div>
+    );
   }
 
   const handleClick = async (clicked) => {
-    if (turn === player && board[clicked] === null) {
+    if (turn === player && board[clicked] === null && !checkWin()) {
       setTurn(player === "X" ? "O" : "X");
 
       await channel.sendEvent({
@@ -119,8 +122,6 @@ function Game({ channel }) {
     }
     if (event.type == "game-over") {
       setBoard(Array(9).fill(null));
-      setPlayer(isXStarted ? "O" : "X");
-      setTurn(isXStarted ? "O" : "X");
       setIsXStarted(!isXStarted);
     }
   });
