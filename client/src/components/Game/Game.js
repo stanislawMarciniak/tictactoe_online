@@ -122,6 +122,7 @@ function Game({ channel }) {
     }
     if (event.type == "game-over") {
       setBoard(Array(9).fill(null));
+
       setIsXStarted(!isXStarted);
     }
   });
