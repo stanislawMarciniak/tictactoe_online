@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useChatContext } from "stream-chat-react";
+import { Message, useChatContext } from "stream-chat-react";
 import Board from "./gameComponents/Board";
 import Scores from "./gameComponents/Scores";
+import Chat from "./gameComponents/Chat";
 import "./Game.css";
 
 const WIN_CONDITION = [
@@ -37,7 +38,7 @@ function Game({ channel }) {
   };
 
   const checkTie = () => {
-    if (board.every((x) => x !== null)) return true;
+    return board.every((x) => x !== null);
   };
 
   useEffect(() => {
@@ -69,7 +70,7 @@ function Game({ channel }) {
   });
   if (!playersJoined) {
     return (
-      <div className="Game">
+      <div className="waitroom">
         <h1>Waiting for other player to join...</h1>
         <div class="custom-loader"></div>
       </div>
@@ -120,6 +121,7 @@ function Game({ channel }) {
       setPlayer("X");
       setTurn("X");
     }
+
     if (event.type == "game-over") {
       setBoard(Array(9).fill(null));
 
@@ -128,12 +130,15 @@ function Game({ channel }) {
   });
 
   return (
-    <div className="game">
-      <Scores score={score} turn={turn} />
-      <Board board={board} onClick={handleClick} />
-      <button className="reset" onClick={handleReset}>
-        Reset
-      </button>
+    <div className="gameContainer">
+      <div>
+        <Scores score={score} turn={turn} />
+        <Board board={board} onClick={handleClick} />
+        <button className="reset" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
+      <Chat />
     </div>
   );
 }

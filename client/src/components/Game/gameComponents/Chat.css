@@ -1,0 +1,89 @@
+.str-chat__list {
+  background-color: white;
+  border-radius: 7px;
+  padding: 5px;
+  height: 300px;
+  width: 260px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.str-chat__list ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+}
+.str-chat__list li {
+  height: 50px;
+  list-style-type: none;
+  background-color: lightgrey;
+  margin-top: 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.str-chat__list .str-chat__message-simple-status {
+  display: none;
+}
+
+.str-chat__list .str-chat__avatar {
+  display: none;
+}
+
+.str-chat__message-text-inner {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.str-chat__message-data {
+  font-size: 10px;
+}
+.str-chat__message-data span {
+  margin-left: 5px;
+}
+
+.str-chat__message-data time {
+  margin-left: 5px;
+}
+
+.str-chat__input-flat {
+  margin-top: 10px;
+  width: 250px;
+  height: 100px;
+  background-color: lightgrey;
+  border-radius: 6px;
+}
+
+.str-chat__input-flat-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.str-chat__input-flat-wrapper textarea {
+  resize: none;
+  width: 200px;
+  height: 90px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px black;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.chat button {
+  font-size: 1.2rem;
+  font-family: 'Fredoka', sans-serif;
+  box-shadow: 0 0 7px #888;
+  height: 2rem;
+  width: 10rem;
+  margin-top: 8px;
+  border: none;
+  border-radius: 7px;
+  background-color: blue;
+  color: #efefef;
+  cursor: pointer;
+}

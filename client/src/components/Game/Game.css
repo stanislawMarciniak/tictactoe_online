@@ -24,9 +24,19 @@
   100%  {transform:scaleY(-1) rotate(-135deg)}
 }
 
-.Game {
+.waitroom {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.gameContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-count: 2;
+  column-gap: 60px;
 }
