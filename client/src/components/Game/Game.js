@@ -23,7 +23,6 @@ function Game({ channel }) {
   const [player, setPlayer] = useState("X");
   const [turn, setTurn] = useState("X");
   const [score, setScore] = useState({ x: 0, o: 0 });
-  const [endClick, setEndClick] = useState(false);
   const [isXStarted, setIsXStarted] = useState(true);
 
   const { client } = useChatContext();
@@ -37,32 +36,32 @@ function Game({ channel }) {
     return false;
   };
 
+  const checkTie = () => {
+    if (board.every((x) => x !== null)) return true;
+  };
+
   useEffect(() => {
-    if (checkWin() && !endClick) {
+    if (checkWin()) {
       setScore(
-        player === "X"
+        turn === "O"
           ? { ...score, x: score.x + 1 }
           : { ...score, o: score.o + 1 }
       );
-    } else if (board.some((x) => x !== null))
-      setPlayer(player === "X" ? "O" : "X");
-  }, [endClick]);
-
-  useEffect(() => {
+    }
     document.body.addEventListener("click", handleKeyDown);
     return () => {
       document.body.removeEventListener("click", handleKeyDown);
     };
   }, [board]);
 
-  const handleKeyDown = () => {
-    if (checkWin() || board.every((x) => x !== null)) {
-      setEndClick(true);
-    }
-    if (endClick) {
+  const handleKeyDown = async () => {
+    if (checkWin() || checkTie()) {
+      await channel.sendEvent({
+        type: "game-over",
+      });
       setBoard(Array(9).fill(null));
-      setEndClick(false);
       setPlayer(isXStarted ? "O" : "X");
+      setTurn(isXStarted ? "O" : "X");
       setIsXStarted(!isXStarted);
     }
   };
@@ -76,7 +75,6 @@ function Game({ channel }) {
 
   const handleClick = async (clicked) => {
     if (turn === player && board[clicked] === null) {
-      console.log("handleClick");
       setTurn(player === "X" ? "O" : "X");
 
       await channel.sendEvent({
@@ -90,10 +88,12 @@ function Game({ channel }) {
     }
   };
 
-  const handleReset = () => {
-    setBoard(Array(9).fill(null));
-    setScore({ x: 0, o: 0 });
+  const handleReset = async () => {
+    await channel.sendEvent({
+      type: "reset",
+    });
     setPlayer("X");
+    setTurn("X");
     setIsXStarted(true);
   };
 
@@ -110,6 +110,18 @@ function Game({ channel }) {
           return val;
         })
       );
+    }
+    if (event.type == "reset") {
+      setBoard(Array(9).fill(null));
+      setScore({ x: 0, o: 0 });
+      setPlayer("X");
+      setTurn("X");
+    }
+    if (event.type == "game-over") {
+      setBoard(Array(9).fill(null));
+      setPlayer(isXStarted ? "O" : "X");
+      setTurn(isXStarted ? "O" : "X");
+      setIsXStarted(!isXStarted);
     }
   });
 
