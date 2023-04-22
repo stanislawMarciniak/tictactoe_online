@@ -8,6 +8,7 @@
 }
 
 .str-chat__list ul {
+
   list-style-type: none;
   margin: 5px;
   padding: 0;
@@ -67,6 +68,7 @@
 }
 
 .str-chat__input-flat-wrapper textarea {
+  overflow-y: hidden;
   resize: none;
   width: 200px;
   height: 90px;
