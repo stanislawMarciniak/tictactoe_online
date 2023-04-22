@@ -1,5 +1,4 @@
 .str-chat__list {
-  background-color: white;
   border-radius: 7px;
   padding: 5px;
   height: 300px;
@@ -14,6 +13,7 @@
   padding: 0;
 }
 .str-chat__list li {
+  text-align: left;
   height: 50px;
   list-style-type: none;
   background-color: lightgrey;
@@ -32,26 +32,29 @@
 }
 
 .str-chat__message-text-inner {
-  font-size: 15px;
-  margin-bottom: 5px;
+  font-size: 17px;
+  margin-bottom: -12px;
+  margin-top: -13px;
+  margin-left: 8px;
+  align-self: flex-start;
 }
 
 .str-chat__message-data {
-  font-size: 10px;
+  font-size: 11px;
 }
 .str-chat__message-data span {
-  margin-left: 5px;
+  margin-left: 7px;
+  color: rgb(21, 138, 27) ;
 }
 
 .str-chat__message-data time {
-  margin-left: 5px;
+  margin-left: 7px;
 }
 
 .str-chat__input-flat {
   margin-top: 10px;
   width: 250px;
   height: 100px;
-  background-color: lightgrey;
   border-radius: 6px;
 }
 
