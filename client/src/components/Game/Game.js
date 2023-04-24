@@ -72,7 +72,7 @@ function Game({ channel }) {
     return (
       <div className="waitroom">
         <h1>Waiting for other player to join...</h1>
-        <div class="custom-loader"></div>
+        <div className="custom-loader"></div>
       </div>
     );
   }

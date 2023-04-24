@@ -4,7 +4,7 @@ import Game from "./Game/Game";
 import "./JoinGame.css";
 import CustomInput from "./Game/gameComponents/CustomInput";
 
-const JoinGame = () => {
+const JoinGame = ({ logOut }) => {
   const [rivalUsername, setRivalUsername] = useState("");
   const { client } = useChatContext();
   const [channel, setChannel] = useState(null);
@@ -24,12 +24,23 @@ const JoinGame = () => {
     setChannel(newChannel);
   };
 
+  const logOutAndLeave = async () => {
+    await channel.stopWatching();
+    setChannel(null);
+    logOut();
+  };
+
   return (
     <>
       {channel ? (
-        <Channel channel={channel} Input={CustomInput}>
-          <Game channel={channel} />
-        </Channel>
+        <>
+          <Channel channel={channel} Input={CustomInput}>
+            <Game channel={channel} />
+          </Channel>
+          <button className="logoutButton" onClick={logOutAndLeave}>
+            Logout
+          </button>
+        </>
       ) : (
         <div className="joinGame">
           <h1> Create Game </h1>
@@ -40,6 +51,9 @@ const JoinGame = () => {
             }}
           />
           <button onClick={createChannel}> Join/Start Game </button>
+          <button className="logoutButton" onClick={logOut}>
+            Logout
+          </button>
         </div>
       )}
     </>
