@@ -8,18 +8,20 @@ function SignUp({ setIsAuth }) {
   const [user, setUser] = useState(null);
 
   const signUp = () => {
-    axios.post("http://localhost:3001/signup", user).then((res) => {
-      const { token, firstName, lastName, username, hashedPassword, userId } =
-        res.data;
+    axios
+      .post("https://tictactoe-ifr4.onrender.com/signup", user)
+      .then((res) => {
+        const { token, firstName, lastName, username, hashedPassword, userId } =
+          res.data;
 
-      cookies.set("token", token);
-      cookies.set("firstName", firstName);
-      cookies.set("lastName", lastName);
-      cookies.set("username", username);
-      cookies.set("hashedPassword", hashedPassword);
-      cookies.set("userId", userId);
-      setIsAuth(true);
-    });
+        cookies.set("token", token);
+        cookies.set("firstName", firstName);
+        cookies.set("lastName", lastName);
+        cookies.set("username", username);
+        cookies.set("hashedPassword", hashedPassword);
+        cookies.set("userId", userId);
+        setIsAuth(true);
+      });
   };
 
   return (

@@ -10,7 +10,7 @@ function Login({ setIsAuth }) {
   const cookies = new Cookies();
   const login = () => {
     axios
-      .post("http://localhost:3001/login", { username, password })
+      .post("https://tictactoe-ifr4.onrender.com/login", { username, password })
       .then((res) => {
         const { token, firstName, lastName, username, userId } = res.data;
 
