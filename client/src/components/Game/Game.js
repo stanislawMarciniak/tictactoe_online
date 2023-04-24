@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Message, useChatContext } from "stream-chat-react";
+import { useChatContext } from "stream-chat-react";
 import Board from "./gameComponents/Board";
 import Scores from "./gameComponents/Scores";
 import Chat from "./gameComponents/Chat";
