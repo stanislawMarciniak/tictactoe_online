@@ -34,12 +34,12 @@ const JoinGame = ({ logOut }) => {
     <>
       {channel ? (
         <>
-          <Channel channel={channel} Input={CustomInput}>
-            <Game channel={channel} />
-          </Channel>
           <button className="logoutButton" onClick={logOutAndLeave}>
             Logout
           </button>
+          <Channel channel={channel} Input={CustomInput}>
+            <Game channel={channel} />
+          </Channel>
         </>
       ) : (
         <div className="joinGame">

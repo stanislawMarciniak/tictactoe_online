@@ -37,15 +37,18 @@ button:active {
 }
 
 .App {
+  flex-wrap: wrap;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
+.frontpage {
+  flex-wrap: wrap;
+}
+
 .logoutButton {
-  position: fixed;
   top: 20px;
   right: 30px;
-  margin: 30px;
 }

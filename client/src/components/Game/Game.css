@@ -32,6 +32,7 @@
 }
 
 .gameContainer {
+  flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -39,4 +40,8 @@
   align-items: center;
   column-count: 2;
   column-gap: 60px;
+}
+
+.reset {
+  margin-bottom: 20px;
 }
