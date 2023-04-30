@@ -8,11 +8,11 @@
 }
 
 .str-chat__list ul {
-
   list-style-type: none;
   margin: 5px;
   padding: 0;
 }
+
 .str-chat__list li {
   text-align: left;
   height: 50px;

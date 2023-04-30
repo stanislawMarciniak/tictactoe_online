@@ -19,3 +19,9 @@ h1{
   font-size: 2rem;
   color: blue;
 }
+
+.logoutButton {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+}

@@ -31,12 +31,12 @@ const JoinGame = ({ logOut }) => {
   };
 
   return (
-    <>
+    <div className="joinGameContainer">
+      <button className="logoutButton" onClick={logOut}>
+        Logout
+      </button>
       {channel ? (
         <>
-          <button className="logoutButton" onClick={logOutAndLeave}>
-            Logout
-          </button>
           <Channel channel={channel} Input={CustomInput}>
             <Game channel={channel} />
           </Channel>
@@ -51,12 +51,9 @@ const JoinGame = ({ logOut }) => {
             }}
           />
           <button onClick={createChannel}> Join/Start Game </button>
-          <button className="logoutButton" onClick={logOut}>
-            Logout
-          </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

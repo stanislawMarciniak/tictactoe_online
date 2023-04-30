@@ -47,8 +47,3 @@ button:active {
 .frontpage {
   flex-wrap: wrap;
 }
-
-.logoutButton {
-  top: 20px;
-  right: 30px;
-}
