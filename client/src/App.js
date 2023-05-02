@@ -54,7 +54,7 @@ function App() {
         </Chat>
       ) : isButtonPressed ? (
         <div className="waitroom">
-          <h1>Waiting for connection with database...</h1>
+          <h1>Waiting for connection with the server...</h1>
           <div className="custom-loader"></div>
         </div>
       ) : (
