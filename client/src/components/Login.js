@@ -3,12 +3,14 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import "./LoginSignUp.css";
 
-function Login({ setIsAuth }) {
+function Login({ setIsAuth, setIsButtonPressed }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const cookies = new Cookies();
   const login = () => {
+    setIsButtonPressed(true);
+
     axios
       .post("https://tictactoe-ifr4.onrender.com/login", { username, password })
       .then((res) => {
@@ -20,6 +22,9 @@ function Login({ setIsAuth }) {
         cookies.set("username", username);
         cookies.set("userId", userId);
         setIsAuth(true);
+      })
+      .finally(() => {
+        setIsButtonPressed(false);
       });
   };
 

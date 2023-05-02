@@ -3,11 +3,12 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import "./LoginSignUp.css";
 
-function SignUp({ setIsAuth }) {
+function SignUp({ setIsAuth, setIsButtonPressed }) {
   const cookies = new Cookies();
   const [user, setUser] = useState(null);
 
   const signUp = () => {
+    setIsButtonPressed(true);
     axios
       .post("https://tictactoe-ifr4.onrender.com/signup", user)
       .then((res) => {
@@ -21,6 +22,9 @@ function SignUp({ setIsAuth }) {
         cookies.set("hashedPassword", hashedPassword);
         cookies.set("userId", userId);
         setIsAuth(true);
+      })
+      .finally(() => {
+        setIsButtonPressed(false);
       });
   };
 
@@ -28,7 +32,7 @@ function SignUp({ setIsAuth }) {
     <div className="signUp">
       <label>Sign up</label>
       <input
-        placeholder="Firts Name"
+        placeholder="First Name"
         onChange={(e) => setUser({ ...user, firstName: e.target.value })}
       />
       <input

@@ -25,14 +25,17 @@ const JoinGame = ({ logOut }) => {
   };
 
   const logOutAndLeave = async () => {
-    await channel.stopWatching();
-    setChannel(null);
     logOut();
+    if (channel) {
+      await channel.stopWatching();
+      setChannel(null);
+      logOut();
+    }
   };
 
   return (
     <div className="joinGameContainer">
-      <button className="logoutButton" onClick={logOut}>
+      <button className="logoutButton" onClick={logOut && logOutAndLeave}>
         Logout
       </button>
       {channel ? (

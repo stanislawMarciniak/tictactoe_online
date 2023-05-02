@@ -15,6 +15,7 @@ function App() {
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
   const [isAuth, setIsAuth] = useState(false);
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
 
   const logOut = () => {
     cookies.remove("token");
@@ -51,10 +52,21 @@ function App() {
         <Chat client={client}>
           <JoinGame logOut={logOut} />
         </Chat>
+      ) : isButtonPressed ? (
+        <div className="waitroom">
+          <h1>Waiting for connection with database...</h1>
+          <div className="custom-loader"></div>
+        </div>
       ) : (
         <>
-          <SignUp setIsAuth={setIsAuth} />
-          <Login setIsAuth={setIsAuth} />
+          <SignUp
+            setIsAuth={setIsAuth}
+            setIsButtonPressed={setIsButtonPressed}
+          />
+          <Login
+            setIsAuth={setIsAuth}
+            setIsButtonPressed={setIsButtonPressed}
+          />
         </>
       )}
     </div>
