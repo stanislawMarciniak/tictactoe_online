@@ -102,7 +102,7 @@ function Game({ channel }) {
   };
 
   channel.on((event) => {
-    if (event.type == "game-move" && event.user.id !== client.userID) {
+    if (event.type === "game-move" && event.user.id !== client.userID) {
       const currentPlayer = event.data.player === "X" ? "O" : "X";
       setPlayer(currentPlayer);
       setTurn(currentPlayer);
@@ -115,14 +115,14 @@ function Game({ channel }) {
         })
       );
     }
-    if (event.type == "reset") {
+    if (event.type === "reset") {
       setBoard(Array(9).fill(null));
       setScore({ x: 0, o: 0 });
       setPlayer("X");
       setTurn("X");
     }
 
-    if (event.type == "game-over") {
+    if (event.type === "game-over") {
       setBoard(Array(9).fill(null));
 
       setIsXStarted(!isXStarted);
