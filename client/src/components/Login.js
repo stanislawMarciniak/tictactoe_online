@@ -40,6 +40,13 @@ function Login({ setIsAuth, setIsButtonPressed }) {
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
+      <div className="demo">
+        <p>
+          Demo accounts:
+          <br /> Login: demo1, demo2
+          <br /> Password: demo1, demo2
+        </p>
+      </div>
       <button onClick={login}>Login</button>
     </div>
   );
