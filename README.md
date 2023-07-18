@@ -47,6 +47,10 @@ npm install
 ```bash
 npm start
 ```
+2. Navigate to client directory and start the server:
+```bash
+npm start
+```
 3. The Tic Tac Toe application will be accessible at `http://localhost:3000` in your web browser.
 
 ### How to Play
